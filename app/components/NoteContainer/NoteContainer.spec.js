@@ -23,7 +23,7 @@ describe('NoteContainer', () => {
         expect(textArea).toExist();
     });
 
-    it('should render a div with css class', () => {
+    it('should render a div with a css class', () => {
         let result = renderer.getRenderOutput();
         expect(result.type).toEqual('div');
         expect(result.props.className).toEqual('notecontainer');
