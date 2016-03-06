@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const NoteTextArea = (props) => <textarea className="notetextarea" defaultValue={props.noteText} onChange={props.handleTextAreaChange}></textarea>
+export const NoteTextArea = ({noteText, handleTextAreaChange}) => <textarea className="notetextarea" defaultValue={noteText} onChange={handleTextAreaChange}></textarea>

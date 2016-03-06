@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const NoteActionBtn = (props) =>  <button className="noteactionbtn" onClick={props.onActionBtnClicked}>{props.label}</button>;
+export const NoteActionBtn = ({label, onActionBtnClicked}) =>  <button className="noteactionbtn" onClick={onActionBtnClicked}>{label}</button>;
