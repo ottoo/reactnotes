@@ -1,15 +1,16 @@
 import React from 'react';
+import NoteContainer from './../../components/NoteContainer';
 
 export class Home extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (
           <div>
-            a
+            <NoteContainer/>
           </div>
         )
     }
