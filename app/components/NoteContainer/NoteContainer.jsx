@@ -1,12 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NoteTitleArea from './../NoteTitleArea';
 import NoteTextArea from './../NoteTextArea';
 import NoteActionBtn from './../NoteActionBtn';
+import { saveNote } from './../../actions.js';
 
-export class NoteContainer extends React.Component {
+class NoteContainer extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.handleTitleAreaChange = this.handleTitleAreaChange.bind(this);
+        this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+        this.onActionBtnClicked = this.onActionBtnClicked.bind(this);
 
         this.state = {
             titleText: '',
@@ -15,15 +21,20 @@ export class NoteContainer extends React.Component {
     }
 
     handleTitleAreaChange(event) {
-        console.log(event.target.value);
+        this.setState({
+            titleText: event.target.value
+        });
     }
 
     handleTextAreaChange(event) {
-        console.log(event.target.value);
+        this.setState({
+            noteText: event.target.value
+        });
     }
 
     onActionBtnClicked() {
-        console.log('Clicked');
+        console.log('Clicked', this.state);
+        this.props.dispatch(saveNote(this.state));
     }
 
     render() {
@@ -36,3 +47,9 @@ export class NoteContainer extends React.Component {
         )
     }
 }
+
+function select(state) {
+    return state;
+}
+
+export default connect(select)(NoteContainer);

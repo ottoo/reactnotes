@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NoteContainer from './../../components/NoteContainer';
 
-export class Home extends React.Component {
+class Home extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,3 +14,9 @@ export class Home extends React.Component {
         )
     }
 }
+
+function select(state) {
+    return state;
+}
+
+export default connect(select)(Home);
