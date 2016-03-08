@@ -12,12 +12,14 @@ class NoteContainer extends React.Component {
 
         this.handleTitleAreaChange = this.handleTitleAreaChange.bind(this);
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-        this.onActionBtnClicked = this.onActionBtnClicked.bind(this);
+        this.onSaveBtnClicked = this.onSaveBtnClicked.bind(this);
+        this.onResetBtnClicked = this.onResetBtnClicked.bind(this);
+        this.resetState = this.resetState.bind(this);
 
         this.state = {
             titleText: '',
             noteText: ''
-        }
+        };
     }
 
     handleTitleAreaChange(event) {
@@ -32,9 +34,20 @@ class NoteContainer extends React.Component {
         });
     }
 
-    onActionBtnClicked() {
-        console.log('Clicked', this.state);
+    onSaveBtnClicked() {
         this.props.dispatch(saveNote(this.state));
+        this.resetState();
+    }
+
+    onResetBtnClicked() {
+        this.resetState();
+    }
+
+    resetState() {
+        this.setState({
+            titleText: '',
+            noteText: ''
+        });
     }
 
     render() {
@@ -42,7 +55,8 @@ class NoteContainer extends React.Component {
           <div className="notecontainer">
             <NoteTitleArea titleText={this.state.titleText} handleTitleAreaChange={this.handleTitleAreaChange}/>
             <NoteTextArea noteText={this.state.noteText} handleTextAreaChange={this.handleTextAreaChange}/>
-            <NoteActionBtn label="Save" onActionBtnClicked={this.onActionBtnClicked}/>
+            <NoteActionBtn label="Save" onActionBtnClicked={this.onSaveBtnClicked}/>
+            <NoteActionBtn label="Reset" onActionBtnClicked={this.onResetBtnClicked}/>
           </div>
         )
     }

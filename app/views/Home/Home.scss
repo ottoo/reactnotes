@@ -1,0 +1,23 @@
+.homecontainer {
+    height: 100%;
+
+    .nav {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+
+        ul {
+            list-style-type: none;
+
+            li {
+                padding: 4px 0px;
+            }
+        }
+    }
+
+    .content {
+        margin: 32px auto;
+        width: 50%;
+        height: 100%;
+    }
+}

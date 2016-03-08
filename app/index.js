@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import noteReducer from './reducers';
 
 import Home from './views/Home';
+import NoteContainer from './components/NoteContainer';
+import NoteList from './components/NoteList';
 
 require('./index.scss');
 
@@ -21,7 +23,8 @@ ReactDOM.render((
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home}>
-              
+                <Route path="notes" component={NoteList} />
+                <Route path="new" component={NoteContainer} />
             </Route>
         </Router>
     </Provider>

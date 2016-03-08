@@ -1,5 +1,7 @@
 .notecontainer {
-    margin: 0 auto;
-    width: 50%;
     height: 80%;
+
+    .noteactionbtn:first-of-type {
+        margin-right: 10px;
+    }
 }

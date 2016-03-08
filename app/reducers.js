@@ -1,4 +1,5 @@
 import update from 'react-addons-update';
+import shortid from 'shortid';
 import { SAVE_NOTE } from './actions';
 
 const initialState = {
@@ -11,16 +12,16 @@ function noteReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 notes: [
                     ...state.notes,
-                    action.note
+                    {
+                        id: shortid.generate(),
+                        titleText: action.note.titleText,
+                        noteText: action.note.noteText
+                    }
                 ]
             });
         default:
             return state;
     }
-}
-
-function addNote(notes, note) {
-    return [...notes, note];
 }
 
 export default noteReducer;
