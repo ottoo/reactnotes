@@ -6,6 +6,9 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 const HotModuleReplaceMentPlugin = new webpack.HotModuleReplacementPlugin();
+const ProvidePlugin = new webpack.ProvidePlugin({
+    '_': 'lodash'
+});
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -29,7 +32,7 @@ module.exports = {
         filename: 'bundle.js',
         path: __dirname + '/app'
     },
-    plugins: [HTMLWebpackPluginConfig, HotModuleReplaceMentPlugin],
+    plugins: [HTMLWebpackPluginConfig, HotModuleReplaceMentPlugin, ProvidePlugin],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx'] 
     },
