@@ -10,7 +10,7 @@ expect.extend(expectJSX);
 
 var component, renderer;
 
-describe('NoteContainer', () => {
+describe('NoteArea', () => {
 
     beforeEach(() => {
         component = TestUtils.renderIntoDocument(<NoteContainer/>);
