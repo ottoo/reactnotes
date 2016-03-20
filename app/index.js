@@ -1,22 +1,17 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
-
+import Login from './views/Login';
 import Home from './views/Home';
 import NoteContainer from './components/NoteContainer';
 import NoteList from './components/NoteList';
 
+import { store, getToken } from './store.js';
 import config from './config.js';
 
 require('./index.scss');
-
-const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 console.log('Initial state', store.getState());
 
@@ -24,12 +19,23 @@ let unsubscribe = store.subscribe(() =>
   console.log('State updated', store.getState())
 );
 
+function requireAuth(nextState, replace) {
+    const token = getToken();
+    if (!token) {
+        replace({
+          pathname: '/login',
+          state: { nextPathname: nextState.location.pathname }
+        })
+    }
+}
+
 ReactDOM.render((
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home}>
-                <Route path="notes" component={NoteList} />
-                <Route path="new" component={NoteContainer} />
+                <Route path="login" component={Login} />    
+                <Route path="notes" component={NoteList} onEnter={requireAuth}/>
+                <Route path="new" component={NoteContainer} onEnter={requireAuth}/>
             </Route>
         </Router>
     </Provider>

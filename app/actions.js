@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { checkStatus, parseJson } from './utils.js';
+import { checkStatus } from './utils.js';
 
 export const SAVE_NOTE = 'SAVE_NOTE';
 export const SET_TOKEN = 'SET_TOKEN';
@@ -28,8 +28,8 @@ export function login(email, password) {
             .then(checkStatus)
             .then(response => response.json())
             .then(json => {
-                console.log(json)
                 dispatch(setToken(json.token));
+                return { isLoggedIn: true, token: json.token };
             })
             .catch(error => {
                 console.log('request failed', error);

@@ -3,15 +3,17 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import NoteList from './../../components/NoteList';
 import { login, saveNote } from './../../actions.js';
+import { getToken } from './../../store.js';
 
 class Home extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    componentDidMount() {
-        this.props.dispatch(login('ottoki@gmail.com', 'salasana'));
+    handleLogout() {
+        console.log('Logging out..');
     }
 
     render() {
@@ -20,19 +22,22 @@ class Home extends React.Component {
                 <nav className="nav">
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/new">Create note</Link></li>
+                        { getToken() ? <li><Link to="/notes">Notes</Link></li> : null }
+                        { getToken() ? <li><Link to="/new">Create note</Link></li> : null }
+                        { !getToken() ? <li><Link to="/login">Login</Link></li> : null }
+                        { getToken() ? <li><a href="" onClick={this.handleLogout}>Logout</a></li> : null }
                     </ul>
                 </nav>
                 <div className="content">
-                    {this.props.children || <NoteList />}
+                    {this.props.children}
                 </div>
             </div>
         )
     }
 }
 
-function select(state) {
+function mapStateToProps(state) {
     return state;
 }
 
-export default connect(select)(Home);
+export default connect(mapStateToProps)(Home);

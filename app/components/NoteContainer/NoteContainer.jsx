@@ -58,7 +58,7 @@ class NoteContainer extends React.Component {
     onSaveBtnClicked() {
         this.props.dispatch(saveNote(this.state));
         this.resetState(() => {
-            this.context.router.push('/');
+            this.context.router.push('/notes');
         });
     }
 
@@ -93,8 +93,8 @@ NoteContainer.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function select(state) {
+function mapStateToProps(state) {
     return state;
 }
 
-export default connect(select)(NoteContainer);
+export default connect(mapStateToProps)(NoteContainer);
