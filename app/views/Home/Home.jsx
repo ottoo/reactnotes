@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import NoteList from './../../components/NoteList';
+import { login, saveNote } from './../../actions.js';
 
 class Home extends React.Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(login('ottoki@gmail.com', 'salasana'));
     }
 
     render() {

@@ -24,7 +24,7 @@ class NoteList extends React.Component {
 }
 
 function select(state) {
-    return state;
+    return { notes: state.noteReducer.notes };
 }
 
 export default connect(select)(NoteList);

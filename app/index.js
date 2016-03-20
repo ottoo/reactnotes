@@ -1,17 +1,22 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
-import noteReducer from './reducers';
+import rootReducer from './reducers';
 
 import Home from './views/Home';
 import NoteContainer from './components/NoteContainer';
 import NoteList from './components/NoteList';
 
+import config from './config.js';
+
 require('./index.scss');
 
-let store = createStore(noteReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 console.log('Initial state', store.getState());
 
