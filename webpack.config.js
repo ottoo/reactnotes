@@ -30,7 +30,8 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: __dirname + '/app'
+        path: __dirname + '/app',
+        publicPath: '/'
     },
     plugins: [HTMLWebpackPluginConfig, HotModuleReplaceMentPlugin, ProvidePlugin],
     resolve: {

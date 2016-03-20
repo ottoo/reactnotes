@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import NoteTitleArea from './../NoteTitleArea';
 import NoteTextArea from './../NoteTextArea';
 import NoteActionBtn from './../NoteActionBtn';
-import { saveNote } from './../../actions.js';
 
 class NoteArea extends React.Component {
 
@@ -21,6 +19,10 @@ class NoteArea extends React.Component {
             noteText: '',
             disableSaveBtn: true
         };
+    }
+
+    componentDidMount() {
+        // TODO get existing note here if pros has noteId
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -56,7 +58,7 @@ class NoteArea extends React.Component {
     }
 
     onSaveBtnClicked() {
-        this.props.dispatch(saveNote(this.state));
+        this.props.saveNote(this.state);
         this.resetState(() => {
             this.context.router.push('/notes');
         });
@@ -93,8 +95,4 @@ NoteArea.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps)(NoteArea);
+export default NoteArea;

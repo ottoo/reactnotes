@@ -5,7 +5,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import Login from './views/Login';
 import Home from './views/Home';
-import NoteArea from './components/NoteArea';
+import NoteAreaContainer from './containers/NoteAreaContainer';
 import NoteList from './components/NoteList';
 
 import { store, getToken } from './store.js';
@@ -34,8 +34,9 @@ ReactDOM.render((
         <Router history={browserHistory}>
             <Route path="/" component={Home}>
                 <Route path="login" component={Login} />    
-                <Route path="notes" component={NoteList} onEnter={requireAuth}/>
-                <Route path="new" component={NoteArea} onEnter={requireAuth}/>
+                <Route path="notes" component={NoteList} />
+                <Route path="note/:noteId" component={NoteAreaContainer} />
+                <Route path="new" component={NoteAreaContainer} onEnter={requireAuth}/>
             </Route>
         </Router>
     </Provider>

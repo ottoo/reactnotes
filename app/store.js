@@ -8,3 +8,7 @@ export const store = createStore(rootReducer, applyMiddleware(thunk, createLogge
 export function getToken() {
     return store.getState().userReducer.token;
 }
+
+export function getNotes() {
+    return store.getState().noteReducer.notes;
+}
