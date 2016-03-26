@@ -30,7 +30,7 @@ export function validateToken(token) {
                 return { token: json.token };
             })
             .catch(error => {
-                console.log('request failed', error.response.message);
+                console.error('request failed', error.response.statusText);
             });
     }
 }
@@ -51,10 +51,10 @@ export function login(email, password) {
             .then(checkStatus)
             .then(response => response.json())
             .then(json => {
-                return { isLoggedIn: true, token: json.token };
+                return { isValid: true, token: json.token };
             })
             .catch(error => {
-                console.log('request failed', error);
+                console.error('request failed', error.response.statusText);
             });
     }
 }

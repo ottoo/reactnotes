@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import NoteList from './../../components/NoteList';
-import { login, saveNote } from './../../actions.js';
-import { getToken } from './../../store.js';
 
 class Home extends React.Component {
 
@@ -50,8 +47,4 @@ Home.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps)(Home);
+export default Home;

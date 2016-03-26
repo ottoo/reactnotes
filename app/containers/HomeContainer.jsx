@@ -22,8 +22,8 @@ function mapDispatchToProps(dispatch, props) {
                     sessionStorage.setItem('jwtToken', res.token);
                     browserHistory.push('/notes');
                 } else {
-                    sessionStorage.removeItem('jwtToken');
-                    browserHistory.push('/');
+                    //sessionStorage.removeItem('jwtToken');
+                    //browserHistory.push('/');
                 }
             });
         }

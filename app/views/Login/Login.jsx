@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { login } from './../../actions.js';
 
 class Login extends React.Component {
 
@@ -16,12 +15,7 @@ class Login extends React.Component {
         const email = this.refs.email.value;
         const password = this.refs.password.value;
 
-        this.props.dispatch(login(email, password)).then((res) => {
-            if (res && res.isLoggedIn) {
-                sessionStorage.setItem('jwtToken', res.token);
-                this.context.router.replace('/notes');
-            }
-        });
+        this.props.login(email, password);
     }
 
     render() {
@@ -39,8 +33,4 @@ Login.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps)(Login);
+export default Login;
