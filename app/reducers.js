@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import update from 'react-addons-update';
 import shortid from 'shortid';
-import { SAVE_NOTE, SET_TOKEN } from './actions';
+import { SAVE_NOTE, SET_TOKEN, SET_CURRENT_NOTE_ID } from './actions';
 
 function userReducer(state = { token: null }, action) {
     switch (action.type) {
@@ -14,7 +14,7 @@ function userReducer(state = { token: null }, action) {
     }
 }
 
-function noteReducer(state = { notes: [] }, action) {
+function noteReducer(state = { notes: [], currentNoteId: null }, action) {
     switch (action.type) {
         case SAVE_NOTE:
             return Object.assign({}, state, {
@@ -26,6 +26,10 @@ function noteReducer(state = { notes: [] }, action) {
                         noteText: action.note.noteText
                     }
                 ]
+            });
+        case SET_CURRENT_NOTE_ID:
+            return Object.assign({}, state, {
+                currentNoteId: action.noteId
             });
         default:
             return state;

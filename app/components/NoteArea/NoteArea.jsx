@@ -22,7 +22,15 @@ class NoteArea extends React.Component {
     }
 
     componentDidMount() {
-        // TODO get existing note here if pros has noteId
+        const { currentNote } = this.props;
+        console.log(currentNote)
+        if (currentNote) {
+            this.setState({
+                titleText: currentNote.titleText,
+                noteText: currentNote.noteText,
+                disableSaveBtn: false
+            });
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {

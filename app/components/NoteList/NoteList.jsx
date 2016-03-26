@@ -1,15 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class NoteList extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.onNoteClicked = this.onNoteClicked.bind(this);
+    }
+
+    onNoteClicked(note, event) {
+        this.context.router.push(`note/${note.id}`);
+        this.props.setCurrentNoteId(note.id);
     }
 
     render() {
-        let createNoteListItem = (note) => {
-            return <li key={note.id}>{note.titleText}</li>;
+        const createNoteListItem = (note) => {
+            let noteItemClick = this.onNoteClicked.bind(this, note);
+            return <li key={note.id} onClick={noteItemClick}>{note.titleText}</li>;
         };
 
         return (
@@ -21,6 +30,10 @@ class NoteList extends React.Component {
           </div>
         )
     }
+}
+
+NoteList.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default NoteList;

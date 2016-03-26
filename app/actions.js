@@ -3,6 +3,7 @@ import { checkStatus } from './utils.js';
 
 export const SAVE_NOTE = 'SAVE_NOTE';
 export const SET_TOKEN = 'SET_TOKEN';
+export const SET_CURRENT_NOTE_ID = 'SET_CURRENT_NOTE_ID';
 
 export function saveNote(note) {
     return { type: SAVE_NOTE, note };
@@ -10,6 +11,10 @@ export function saveNote(note) {
 
 export function setToken(token) {
     return { type: SET_TOKEN, token };
+}
+
+export function setCurrentNoteId(noteId) {
+    return { type: SET_CURRENT_NOTE_ID, noteId };
 }
 
 export function login(email, password) {

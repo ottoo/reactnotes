@@ -12,3 +12,9 @@ export function getToken() {
 export function getNotes() {
     return store.getState().noteReducer.notes;
 }
+
+export function findNote(id) {
+    return _.filter(getNotes(), (note) => {
+        return note.id === id;
+    });
+}
