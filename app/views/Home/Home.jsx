@@ -10,10 +10,20 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.handleLogout = this.handleLogout.bind(this);
+        this.isUserLoggedIn = this.isUserLoggedIn.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.validateToken();
     }
 
     handleLogout() {
-        console.log('Logging out..');
+        sessionStorage.removeItem('jwtToken');
+        this.context.router.replace('/');
+    }
+
+    isUserLoggedIn() {
+        return sessionStorage.getItem('jwtToken');
     }
 
     render() {
@@ -22,10 +32,10 @@ class Home extends React.Component {
                 <nav className="nav">
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        { getToken() ? <li><Link to="/notes">Notes</Link></li> : null }
-                        { getToken() ? <li><Link to="/new">Create note</Link></li> : null }
-                        { !getToken() ? <li><Link to="/login">Login</Link></li> : null }
-                        { getToken() ? <li><a href="" onClick={this.handleLogout}>Logout</a></li> : null }
+                        { this.isUserLoggedIn() ? <li><Link to="/notes">Notes</Link></li> : null }
+                        { this.isUserLoggedIn() ? <li><Link to="/new">Create note</Link></li> : null }
+                        { !this.isUserLoggedIn() ? <li><Link to="/login">Login</Link></li> : null }
+                        { this.isUserLoggedIn() ? <li><a href="" onClick={this.handleLogout}>Logout</a></li> : null }
                     </ul>
                 </nav>
                 <div className="content">
@@ -34,6 +44,10 @@ class Home extends React.Component {
             </div>
         )
     }
+}
+
+Home.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {

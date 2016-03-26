@@ -23,7 +23,7 @@ class NoteArea extends React.Component {
 
     componentDidMount() {
         const { currentNote } = this.props;
-        console.log(currentNote)
+
         if (currentNote) {
             this.setState({
                 titleText: currentNote.titleText,

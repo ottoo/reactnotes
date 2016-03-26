@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import Login from './views/Login';
-import Home from './views/Home';
+import HomeContainer from './containers/HomeContainer';
 import NoteAreaContainer from './containers/NoteAreaContainer';
 import NoteListContainer from './containers/NoteListContainer';
 
-import { store, getToken } from './store.js';
+import { store } from './store.js';
 import config from './config.js';
 
 require('./index.scss');
@@ -20,7 +20,7 @@ let unsubscribe = store.subscribe(() =>
 );
 
 function requireAuth(nextState, replace) {
-    const token = getToken();
+    const token = sessionStorage.getItem('jwtToken');
     if (!token) {
         replace({
           pathname: '/login',
@@ -32,7 +32,7 @@ function requireAuth(nextState, replace) {
 ReactDOM.render((
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={Home}>
+            <Route path="/" component={HomeContainer}>
                 <Route path="login" component={Login} />    
                 <Route path="notes" component={NoteListContainer} onEnter={requireAuth} />
                 <Route path="note/:noteId" component={NoteAreaContainer} onEnter={requireAuth} />

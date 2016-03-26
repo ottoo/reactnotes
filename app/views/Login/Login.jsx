@@ -18,6 +18,7 @@ class Login extends React.Component {
 
         this.props.dispatch(login(email, password)).then((res) => {
             if (res && res.isLoggedIn) {
+                sessionStorage.setItem('jwtToken', res.token);
                 this.context.router.replace('/notes');
             }
         });

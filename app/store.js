@@ -5,10 +5,6 @@ import rootReducer from './reducers';
 
 export const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
-export function getToken() {
-    return store.getState().userReducer.token;
-}
-
 export function getNotes() {
     return store.getState().noteReducer.notes;
 }
