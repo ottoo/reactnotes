@@ -23,8 +23,4 @@ class NoteList extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { notes: state.noteReducer.notes };
-}
-
-export default connect(mapStateToProps)(NoteList);
+export default NoteList;
