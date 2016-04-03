@@ -80,7 +80,10 @@ module.exports = function(config) {
           { test: /\.scss$/, loaders: ["style", "css", "sass"]
             }
         ]
-      }
+      },
+        plugins: [new webpack.ProvidePlugin({
+            '_': 'lodash'
+        })],
     },
 
 
