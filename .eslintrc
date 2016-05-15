@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": "airbnb",
+  "rules": {
+    "comma-dangle": "off",
+    "no-console": "off",
+    "no-else-return": "off",
+    "no-eval": "error",
+    "quote-props": ["error", "consistent"]
+  }
+}
