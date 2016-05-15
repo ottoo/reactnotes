@@ -1,41 +1,44 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
-  filename: 'index.html',
-  inject: 'body'
+    template: __dirname + '/app/index.html',
+    filename: 'index.html',
+    inject: 'body'
 });
 const HotModuleReplaceMentPlugin = new webpack.HotModuleReplacementPlugin();
 const ProvidePlugin = new webpack.ProvidePlugin({
     '_': 'lodash'
 });
+const CommonChunksPlugin = new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor'
+});
+const pkg = require('./package.json');
 
 module.exports = {
     devtool: 'eval-source-map',
-    entry: [
-        './app/index.js'
-    ],
+    entry: {
+        app: './app/index.js',
+        vendor: Object.keys(pkg.dependencies)
+    },
     module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
-            }
-        ]
+        loaders: [{
+            test: /\.jsx?$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/
+        }, {
+            test: /\.scss$/,
+            loaders: ["style", "css", "sass"]
+        }]
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].[hash].js',
+        chunkFilename: '[chunkhash].js',
         path: __dirname + '/app',
         publicPath: '/'
     },
     plugins: [HTMLWebpackPluginConfig, HotModuleReplaceMentPlugin, ProvidePlugin],
     resolve: {
-        extensions: ['', '.js', '.json', '.jsx'] 
+        extensions: ['', '.js', '.json', '.jsx']
     },
     devServer: {
         contentBase: __dirname + '/app',
