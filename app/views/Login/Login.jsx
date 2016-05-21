@@ -18,29 +18,31 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form className="loginform" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="email">Email address</label>
-                    <input
-                        id="email"
-                        type="text"
-                        ref="email"
-                        placeholder="email"
-                        className="form-control"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        ref="password"
-                        placeholder="password"
-                        className="form-control"
-                    />
-                </div>
-                <button type="submit" className="btn btn-default">Login</button>
-            </form>
+            <div className="loginpage">
+                <form className="loginform" onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email address</label>
+                        <input
+                            id="email"
+                            type="text"
+                            ref="email"
+                            placeholder="email"
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            ref="password"
+                            placeholder="password"
+                            className="form-control"
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-default loginbtn">Login</button>
+                </form>
+            </div>
         );
     }
 }

@@ -7,18 +7,20 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 const HotModuleReplaceMentPlugin = new webpack.HotModuleReplacementPlugin();
 const ProvidePlugin = new webpack.ProvidePlugin({
-    '_': 'lodash'
+    '_': 'lodash',
+    $: 'jquery',
+    jQuery: 'jquery'
 });
 const CommonChunksPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor'
 });
-const pkg = require('./package.json');
+
 
 module.exports = {
     devtool: 'eval-source-map',
     entry: {
         app: './app/index.js',
-        vendor: Object.keys(pkg.dependencies)
+        vendor: './app/vendor.js'
     },
     module: {
         loaders: [{

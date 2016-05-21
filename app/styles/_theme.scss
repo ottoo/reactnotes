@@ -1,0 +1,25 @@
+label {
+    color: #FF0000;
+    margin-bottom: 15px !important;
+}
+
+.form-group {
+    margin: 25px 0px;
+}
+
+.form-control {
+    border-radius: 0px !important;
+}
+
+a {
+    color: #FF0000 !important;
+
+    &:hover {
+        color: darken(#FF0000, 10%) !important;
+    }
+}
+
+.btn-default {
+    color: #FF0000 !important;
+    border-radius: 0px !important;
+}
