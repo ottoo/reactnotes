@@ -27,7 +27,10 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loaders: ["style", "css", "sass"]
+            loaders: ['style', 'css', 'sass']
+        }, {
+            test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+            loader: 'file?name=res/[name].[ext]'
         }]
     },
     output: {
