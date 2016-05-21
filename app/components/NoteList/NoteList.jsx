@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 class NoteList extends React.Component {
 
@@ -23,17 +21,17 @@ class NoteList extends React.Component {
 
         return (
           <div className="notelist">
-            <h2>Notes</h2>
+            <div className="notelisttitle">Notes</div>
             <ul>
-                {this.props.notes.map(createNoteListItem)}
+              {this.props.notes.map(createNoteListItem)}
             </ul>
           </div>
-        )
+        );
     }
 }
 
 NoteList.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
+    router: React.PropTypes.object.isRequired
+};
 
 export default NoteList;

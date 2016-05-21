@@ -1,20 +1,32 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { validateToken } from './../actions.js';
-import Home from './../views/Home';
+import Home from './../views/App';
 import { browserHistory } from 'react-router';
 
+/**
+ * Maps the available state to components props.
+ * @param  {Object} state
+ * @return {Object}
+ */
 function mapStateToProps(state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch, props) {
+/**
+ * Maps the dispatched actions to component properties so that the dispatched
+ * actions can be defined outside of the component.
+ * @param  {Function}
+ * @return {Object}
+ */
+function mapDispatchToProps(dispatch) {
   return {
+    // Validates the users token and throws the user to the login page if it
+    // is not found. Called also on browser refresh.
     validateToken: () => {
       const token = sessionStorage.getItem('jwtToken');
 
       if (!token) {
-        return;
+        return false;
       }
 
       return dispatch(validateToken(token)).then(res => {
@@ -30,4 +42,9 @@ function mapDispatchToProps(dispatch, props) {
   };
 }
 
+/**
+ * Finally connect the react component to the redux store.
+ * @param  {Function} mapStateToProps
+ * @param  {Function} mapDispatchToProps
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

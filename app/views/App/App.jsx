@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class Home extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="homecontainer">
+      <div className="appcontainer">
         <nav className="nav">
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -43,8 +43,13 @@ class Home extends React.Component {
   }
 }
 
-Home.contextTypes = {
+App.propTypes = {
+  children: React.PropTypes.object,
+  validateToken: React.PropTypes.func
+};
+
+App.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default Home;
+export default App;

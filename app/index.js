@@ -3,14 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import AppContainer from './containers/AppContainer';
 import LoginContainer from './containers/LoginContainer';
-import HomeContainer from './containers/HomeContainer';
 import NoteAreaContainer from './containers/NoteAreaContainer';
 import NoteListContainer from './containers/NoteListContainer';
 
 import { store } from './store.js';
 
-require('./index.scss');
+import './styles/main.scss';
 
 console.log('Initial state', store.getState());
 
@@ -31,7 +31,7 @@ function requireAuth(nextState, replace) {
 ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={HomeContainer}>
+      <Route path="/" component={AppContainer}>
         <Route path="login" component={LoginContainer} />
         <Route path="notes" component={NoteListContainer} onEnter={requireAuth} />
         <Route path="note/:noteId" component={NoteAreaContainer} onEnter={requireAuth} />
