@@ -1,22 +1,25 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { saveNote } from './../actions.js';
+import { saveNote, updateNote } from './../actions.js';
 import NoteArea from './../components/NoteArea';
 
 function mapStateToProps(state) {
-  const { notes, currentNoteId } = state.noteReducer;
+    const notes = state.noteReducer.get('notes');
+    const currentNoteId = state.noteReducer.get('currentNoteId');
 
-  return {
-    currentNote: _.find(notes, (note) => note.id === currentNoteId)
-  };
+    return {
+        currentNote: notes.find(note => note.get('id') === currentNoteId)
+    };
 }
 
-function mapDispatchToProps(dispatch, props) {
-  return {
-    saveNote: (note) => {
-      dispatch(saveNote(note));
-    }
-  };
+function mapDispatchToProps(dispatch) {
+    return {
+        saveNote: (note) => {
+            dispatch(saveNote(note));
+        },
+        updateNote: (params) => {
+            dispatch(updateNote(params));
+        }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteArea);

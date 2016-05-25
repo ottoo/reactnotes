@@ -4,9 +4,19 @@
         font-size: 32px;
         letter-spacing: 1.5px;
         font-weight: 300;
+        margin-bottom: 25px;
+        border-bottom: 1px dashed #FF0000;
     }
 
-    li {
+    .notelistitem {
+        font-size: 22px;
+        letter-spacing: 1.5px;
+        font-weight: 300px;
+        cursor: pointer;
         text-decoration: underline;
+
+        &:hover {
+            color: lighten(#000, 50%) !important;
+        }
     }
 }

@@ -22,4 +22,8 @@ a {
 .btn-default {
     color: #FF0000 !important;
     border-radius: 0px !important;
+
+    &[disabled] {
+        color: lighten(#000, 50%) !important;
+    }
 }

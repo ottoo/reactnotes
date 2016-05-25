@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import NoteTitleArea from './../NoteTitleArea';
 import NoteTextArea from './../NoteTextArea';
 import NoteActionBtn from './../NoteActionBtn';
@@ -22,51 +23,32 @@ class NoteArea extends React.Component {
     }
 
     componentDidMount() {
-        const { currentNote } = this.props;
+        const currentNote = this.props.currentNote;
 
         if (currentNote) {
-            this.setState({
-                titleText: currentNote.titleText,
-                noteText: currentNote.noteText,
-                disableSaveBtn: false
-            });
+            this.setState({titleText: currentNote.get('titleText'), noteText: currentNote.get('noteText'), disableSaveBtn: false});
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        let { titleText, noteText } = this.state;
+    componentDidUpdate() {
+        let {titleText, noteText} = this.state;
         let titleExists = titleText.length > 0;
         let noteExists = noteText.length > 0;
 
         if (this.state.disableSaveBtn && titleExists && noteExists) {
-            this.setState({ disableSaveBtn: false });
+            this.setState({disableSaveBtn: false});
         } else if (!this.state.disableSaveBtn && !titleExists && !noteExists) {
-            this.setState({ disableSaveBtn: true });
+            this.setState({disableSaveBtn: true});
         }
-    }
-
-    disableSaveBtn() {
-        let { titleText, noteText } = this.state;
-        
-        if (titleText && titleText.length > 0 && noteText && noteText.length > 0) {
-            this.setState({ disableSaveBtn: false });
-        }
-    }
-
-    handleTitleAreaChange(event) {
-        this.setState({
-            titleText: event.target.value
-        });
-    }
-
-    handleTextAreaChange(event) {
-        this.setState({
-            noteText: event.target.value
-        });
     }
 
     onSaveBtnClicked() {
-        this.props.saveNote(this.state);
+        // TODO: Improve this function
+        const pathname = this.props.location.pathname;
+
+        this.props.currentNote && pathname !== '/new'
+            ? this.props.updateNote({note: this.state, id: this.props.currentNote.get('id')})
+            : this.props.saveNote(this.state);
         this.resetState(() => {
             this.context.router.push('/notes');
         });
@@ -76,11 +58,24 @@ class NoteArea extends React.Component {
         this.resetState();
     }
 
+    handleTitleAreaChange(event) {
+        this.setState({titleText: event.target.value});
+    }
+
+    handleTextAreaChange(event) {
+        this.setState({noteText: event.target.value});
+    }
+
+    disableSaveBtn() {
+        const {titleText, noteText} = this.state;
+
+        if (titleText && titleText.length > 0 && noteText && noteText.length > 0) {
+            this.setState({disableSaveBtn: false});
+        }
+    }
+
     resetState(cb) {
-        this.setState({
-            titleText: '',
-            noteText: ''
-        });
+        this.setState({titleText: '', noteText: ''});
 
         if (_.isFunction(cb)) {
             cb();
@@ -89,18 +84,19 @@ class NoteArea extends React.Component {
 
     render() {
         return (
-          <div className="notearea">
-            <NoteTitleArea titleText={this.state.titleText} handleTitleAreaChange={this.handleTitleAreaChange}/>
-            <NoteTextArea noteText={this.state.noteText} handleTextAreaChange={this.handleTextAreaChange}/>
-            <NoteActionBtn label="Save" isDisabled={this.state.disableSaveBtn} onActionBtnClicked={this.onSaveBtnClicked}/>
-            <NoteActionBtn label="Reset" onActionBtnClicked={this.onResetBtnClicked}/>
-          </div>
+            <div className="notearea">
+                <Link to="/notes" className="goback">Go back</Link>
+                <NoteTitleArea titleText={this.state.titleText} handleTitleAreaChange={this.handleTitleAreaChange}/>
+                <NoteTextArea noteText={this.state.noteText} handleTextAreaChange={this.handleTextAreaChange}/>
+                <NoteActionBtn label="Save" classNames="noteactionbtn btn btn-default" isDisabled={this.state.disableSaveBtn} onActionBtnClicked={this.onSaveBtnClicked}/>
+                <NoteActionBtn label="Reset" classNames="noteactionbtn btn btn-default" onActionBtnClicked={this.onResetBtnClicked}/>
+            </div>
         )
     }
 }
 
 NoteArea.contextTypes = {
-  router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired
 }
 
 export default NoteArea;

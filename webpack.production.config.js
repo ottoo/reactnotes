@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     template: __dirname + '/app/index.html',
     filename: 'index.html',
@@ -11,7 +11,15 @@ const UglifyJSPluginConfig = new webpack.optimize.UglifyJsPlugin({
         warnings: false
     }
 });
+const ProvidePlugin = new webpack.ProvidePlugin({
+    _: 'lodash',
+    $: 'jquery',
+    jQuery: 'jquery'
+});
 const DedupePlugin = new webpack.optimize.DedupePlugin();
+const DefinePlugin = new webpack.DefinePlugin({
+    'process.env.NODE_ENV': '"production"'
+});
 
 module.exports = {
     devtool: 'source-map',
@@ -25,7 +33,10 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loaders: ["style", "css", "sass"]
+            loaders: ['style', 'css', 'sass']
+        }, {
+            test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+            loader: 'file?name=res/[name].[ext]'
         }]
     },
     output: {
@@ -33,7 +44,8 @@ module.exports = {
         path: __dirname + '/dist',
         hash: true
     },
-    plugins: [HTMLWebpackPluginConfig, UglifyJSPluginConfig, DedupePlugin],
+    plugins: [HTMLWebpackPluginConfig, UglifyJSPluginConfig, DedupePlugin,
+        DefinePlugin, ProvidePlugin],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx']
     }

@@ -1,6 +1,11 @@
 .notearea {
     height: 80%;
 
+    .goback {
+        display: block;
+        margin-bottom: 25px;
+    }
+
     .noteactionbtn:first-of-type {
         margin-right: 10px;
     }

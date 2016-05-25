@@ -16,7 +16,7 @@ class NoteList extends React.Component {
     render() {
         const createNoteListItem = (note) => {
             let noteItemClick = this.onNoteClicked.bind(this, note);
-            return <li key={note.id} onClick={noteItemClick}>{note.titleText}</li>;
+            return <li className="notelistitem" key={note.id} onClick={noteItemClick}>{note.titleText}</li>;
         };
 
         return (
