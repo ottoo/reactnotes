@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCurrentNoteId } from './../actions.js';
+import { setCurrentNoteId } from './../actions/index.js';
 import NoteList from './../components/NoteList';
 
 function mapStateToProps(state) {

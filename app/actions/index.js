@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
-import CONFIG from './config';
+import CONFIG from './../config';
 import {
     checkStatus
-} from './utils.js';
+} from './../utils.js';
 
 export const SAVE_NOTE = 'SAVE_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';

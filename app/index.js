@@ -8,7 +8,7 @@ import LoginContainer from './containers/LoginContainer';
 import NoteAreaContainer from './containers/NoteAreaContainer';
 import NoteListContainer from './containers/NoteListContainer';
 
-import { store } from './store.js';
+import { store } from './stores/index.js';
 
 import './styles/main.scss';
 
@@ -19,13 +19,13 @@ store.subscribe(() =>
 );
 
 function requireAuth(nextState, replace) {
-  const token = sessionStorage.getItem('jwtToken');
-  if (!token) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    });
-  }
+    const token = sessionStorage.getItem('jwtToken');
+    if (!token) {
+        replace({
+            pathname: '/login',
+            state: { nextPathname: nextState.location.pathname }
+        });
+    }
 }
 
 ReactDOM.render((

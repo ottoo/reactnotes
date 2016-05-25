@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SAVE_NOTE, UPDATE_NOTE, SET_CURRENT_NOTE_ID } from './actions';
+import { SAVE_NOTE, UPDATE_NOTE, SET_CURRENT_NOTE_ID } from './../actions/index.js';
 import shortid from 'shortid';
 import { List, Map, fromJS } from 'immutable';
 

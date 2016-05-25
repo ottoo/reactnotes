@@ -1,7 +1,7 @@
-import {connect} from 'react-redux';
-import {validateToken} from './../actions.js';
+import { connect } from 'react-redux';
+import { validateToken } from './../actions/index.js';
 import Home from './../views/App';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 /**
  * Maps the available state to components props.

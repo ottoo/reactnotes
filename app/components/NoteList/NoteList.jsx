@@ -20,12 +20,12 @@ class NoteList extends React.Component {
         };
 
         return (
-          <div className="notelist">
-            <div className="notelisttitle">Notes</div>
-            <ul>
-              {this.props.notes.map(createNoteListItem)}
-            </ul>
-          </div>
+            <div className="notelist">
+                <div className="notelisttitle">Notes</div>
+                <ul>
+                    {this.props.notes.map(createNoteListItem)}
+                </ul>
+            </div>
         );
     }
 }
