@@ -1,3 +1,18 @@
-.login {
-    
+.loginpage {
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+
+    .loginform {
+        width: 50%;
+        align-self: center;
+
+        .loginbtn {
+            width: 125px;
+            margin-top: 10px;
+            outline: !important;
+        }
+    }
 }
