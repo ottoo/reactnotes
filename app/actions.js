@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import CONFIG from './config';
 import {
     checkStatus
 } from './utils.js';
@@ -31,7 +32,7 @@ export function setCurrentNoteId(noteId) {
 
 export function validateToken(token) {
     return dispatch => {
-        return fetch('http://127.0.0.1:3333/user/me', {
+        return fetch(`${CONFIG.BACKEND_URL}/user/me`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -52,7 +53,7 @@ export function validateToken(token) {
 
 export function login(email, password) {
     return dispatch => {
-        return fetch('http://127.0.0.1:3333/user/login', {
+        return fetch(`${CONFIG.BACKEND_URL}/user/login`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
