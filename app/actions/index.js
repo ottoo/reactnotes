@@ -15,11 +15,10 @@ export function saveNote(note) {
     };
 }
 
-export function updateNote(params) {
+export function updateNote(note) {
     return {
         type: UPDATE_NOTE,
-        note: params.note,
-        id: params.id
+        note
     };
 }
 

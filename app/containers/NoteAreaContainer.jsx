@@ -16,8 +16,8 @@ function mapDispatchToProps(dispatch) {
         saveNote: (note) => {
             dispatch(saveNote(note));
         },
-        updateNote: (params) => {
-            dispatch(updateNote(params));
+        updateNote: (note) => {
+            dispatch(updateNote(note));
         }
     };
 }

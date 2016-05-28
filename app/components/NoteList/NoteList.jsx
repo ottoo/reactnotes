@@ -8,7 +8,8 @@ class NoteList extends React.Component {
         this.onNoteClicked = this.onNoteClicked.bind(this);
     }
 
-    onNoteClicked(note, event) {
+    onNoteClicked(note) {
+        console.log('note', note);
         this.context.router.push(`note/${note.id}`);
         this.props.setCurrentNoteId(note.id);
     }
@@ -33,5 +34,11 @@ class NoteList extends React.Component {
 NoteList.contextTypes = {
     router: React.PropTypes.object.isRequired
 };
+
+NoteList.propTypes = {
+    setCurrentNoteId: React.PropTypes.func,
+    notes: React.PropTypes.array
+};
+
 
 export default NoteList;

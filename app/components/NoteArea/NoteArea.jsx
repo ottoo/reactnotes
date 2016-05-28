@@ -16,6 +16,7 @@ class NoteArea extends React.Component {
         this.resetState = this.resetState.bind(this);
 
         this.state = {
+            id: '',
             titleText: '',
             noteText: '',
             disableSaveBtn: true
@@ -26,19 +27,24 @@ class NoteArea extends React.Component {
         const currentNote = this.props.currentNote;
 
         if (currentNote) {
-            this.setState({titleText: currentNote.get('titleText'), noteText: currentNote.get('noteText'), disableSaveBtn: false});
+            this.setState({
+                id: currentNote.get('id'),
+                titleText: currentNote.get('titleText'),
+                noteText: currentNote.get('noteText'),
+                disableSaveBtn: false
+            });
         }
     }
 
     componentDidUpdate() {
-        let {titleText, noteText} = this.state;
-        let titleExists = titleText.length > 0;
-        let noteExists = noteText.length > 0;
+        const { titleText, noteText } = this.state;
+        const titleExists = titleText.length > 0;
+        const noteExists = noteText.length > 0;
 
         if (this.state.disableSaveBtn && titleExists && noteExists) {
-            this.setState({disableSaveBtn: false});
+            this.setState({ disableSaveBtn: false });
         } else if (!this.state.disableSaveBtn && !titleExists && !noteExists) {
-            this.setState({disableSaveBtn: true});
+            this.setState({ disableSaveBtn: true });
         }
     }
 
@@ -47,8 +53,9 @@ class NoteArea extends React.Component {
         const pathname = this.props.location.pathname;
 
         this.props.currentNote && pathname !== '/new'
-            ? this.props.updateNote({note: this.state, id: this.props.currentNote.get('id')})
+            ? this.props.updateNote(this.state)
             : this.props.saveNote(this.state);
+
         this.resetState(() => {
             this.context.router.push('/notes');
         });
@@ -59,23 +66,23 @@ class NoteArea extends React.Component {
     }
 
     handleTitleAreaChange(event) {
-        this.setState({titleText: event.target.value});
+        this.setState({ titleText: event.target.value });
     }
 
     handleTextAreaChange(event) {
-        this.setState({noteText: event.target.value});
+        this.setState({ noteText: event.target.value });
     }
 
     disableSaveBtn() {
-        const {titleText, noteText} = this.state;
+        const { titleText, noteText } = this.state;
 
         if (titleText && titleText.length > 0 && noteText && noteText.length > 0) {
-            this.setState({disableSaveBtn: false});
+            this.setState({ disableSaveBtn: false });
         }
     }
 
     resetState(cb) {
-        this.setState({titleText: '', noteText: ''});
+        this.setState({ titleText: '', noteText: '' });
 
         if (_.isFunction(cb)) {
             cb();
@@ -97,6 +104,13 @@ class NoteArea extends React.Component {
 
 NoteArea.contextTypes = {
     router: React.PropTypes.object.isRequired
-}
+};
+
+NoteArea.propTypes = {
+    location: React.PropTypes.object.isRequired,
+    currentNote: React.PropTypes.object,
+    saveNote: React.PropTypes.func,
+    updateNote: React.PropTypes.func,
+};
 
 export default NoteArea;
