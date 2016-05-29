@@ -4,44 +4,47 @@ import expect from 'expect';
 import expectJSX from 'expect-jsx';
 
 import NoteArea from './NoteArea.jsx';
-import { NoteTextArea } from './../NoteTextArea/NoteTextArea.jsx';
 
 expect.extend(expectJSX);
 
-var component, renderer;
+let component = null;
+let renderer = null;
 
 describe('NoteArea', () => {
 
     beforeEach(() => {
         NoteArea.contextTypes = {};
-        component = TestUtils.renderIntoDocument(<NoteArea/>);
+        component = TestUtils.renderIntoDocument(<NoteArea />);
         renderer = TestUtils.createRenderer();
-        renderer.render(<NoteArea/>);
+        renderer.render(<NoteArea />);
     });
 
     it('should contain a textarea', () => {
-        let textArea = TestUtils.findRenderedDOMComponentWithTag(component, 'textarea');
+        const textArea = TestUtils.findRenderedDOMComponentWithTag(component, 'textarea');
         expect(textArea).toExist();
     });
 
     it('should render a div with a css class', () => {
-        let result = renderer.getRenderOutput();
+        const result = renderer.getRenderOutput();
         expect(result.type).toEqual('div');
         expect(result.props.className).toEqual('notearea');
     });
 
     it('should have a state', () => {
-        let state = component.state;
-        expect(component.state).toExist();
+        const state = component.state;
+        expect(state.id).toEqual('');
+        expect(state.titleText).toEqual('');
+        expect(state.noteText).toEqual('');
+        expect(state.disableSaveBtn).toEqual(true);
     });
 
     it('should have a save button with text "Save"', () => {
-        let saveButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        const saveButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
         expect(saveButton.textContent).toEqual('Save');
     });
 
     it('should have a reset button with text "Reset"', () => {
-        let resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
+        const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
         expect(resetButton.textContent).toEqual('Reset');
     });
 
@@ -51,9 +54,9 @@ describe('NoteArea', () => {
             noteText: 'note'
         };
 
-        let resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
+        const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
         TestUtils.Simulate.click(resetButton);
-        
+
         expect(component.state.titleText).toEqual('');
         expect(component.state.noteText).toEqual('');
     });

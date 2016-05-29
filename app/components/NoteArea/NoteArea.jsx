@@ -102,7 +102,8 @@ class NoteArea extends React.Component {
 }
 
 NoteArea.contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object
 };
 
 NoteArea.propTypes = {
