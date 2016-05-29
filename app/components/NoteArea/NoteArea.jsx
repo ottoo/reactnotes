@@ -49,7 +49,6 @@ class NoteArea extends React.Component {
     }
 
     onSaveBtnClicked() {
-        // TODO: Improve this function
         const pathname = this.props.location.pathname;
 
         this.props.currentNote && pathname !== '/new'
@@ -98,7 +97,7 @@ class NoteArea extends React.Component {
                 <NoteActionBtn label="Save" classNames="noteactionbtn btn btn-default" isDisabled={this.state.disableSaveBtn} onActionBtnClicked={this.onSaveBtnClicked}/>
                 <NoteActionBtn label="Reset" classNames="noteactionbtn btn btn-default" onActionBtnClicked={this.onResetBtnClicked}/>
             </div>
-        )
+        );
     }
 }
 
