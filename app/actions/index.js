@@ -8,28 +8,22 @@ export const SAVE_NOTE = 'SAVE_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const SET_CURRENT_NOTE_ID = 'SET_CURRENT_NOTE_ID';
 
-export function saveNote(note) {
-    return {
-        type: SAVE_NOTE,
-        note
-    };
-}
+export const saveNote = (note) => ({
+    type: SAVE_NOTE,
+    note
+});
 
-export function updateNote(note) {
-    return {
-        type: UPDATE_NOTE,
-        note
-    };
-}
+export const updateNote = (note) => ({
+    type: UPDATE_NOTE,
+    note
+});
 
-export function setCurrentNoteId(noteId) {
-    return {
-        type: SET_CURRENT_NOTE_ID,
-        noteId
-    };
-}
+export const setCurrentNoteId = (noteId) => ({
+    type: SET_CURRENT_NOTE_ID,
+    noteId
+});
 
-export function validateToken(token) {
+export const validateToken = (token) => {
     return dispatch => {
         return fetch(`${CONFIG.BACKEND_URL}/user/me`, {
                 method: 'POST',
@@ -50,7 +44,7 @@ export function validateToken(token) {
     };
 }
 
-export function login(email, password) {
+export const login = (email, password) => {
     return dispatch => {
         return fetch(`${CONFIG.BACKEND_URL}/user/login`, {
                 method: 'POST',
