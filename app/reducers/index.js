@@ -16,16 +16,18 @@ function noteReducer(state = initialState, action) {
             const newNotes = notes.push(Map({
                 id: shortid.generate(),
                 titleText: action.note.titleText,
-                noteText: action.note.noteText
+                noteText: action.note.noteText,
+                updatedAt: Date.now()
             }));
 
             return state.set('notes', newNotes);
         }
         case UPDATE_NOTE: {
             let notes = state.get('notes');
+            let updatedNote = Object.assign({}, action.note, { updatedAt: Date.now() });
 
             notes = notes.update(notes.findIndex(
-                note => note.get('id') === action.note.id), () => fromJS(action.note));
+                note => note.get('id') === action.note.id), () => fromJS(updatedNote));
 
             return state.set('notes', notes);
         }

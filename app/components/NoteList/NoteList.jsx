@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class NoteList extends React.Component {
 
@@ -14,13 +15,26 @@ class NoteList extends React.Component {
 
     render() {
         const createNoteListItem = note => {
-            let noteItemClick = this.onNoteClicked.bind(this, note);
-            return <li className="notelistitem" key={note.id} onClick={noteItemClick}>{note.titleText}</li>;
+            const noteItemClick = this.onNoteClicked.bind(this, note);
+            const formattedDate = moment(note.updatedAt).format('DD / MM / YYYY, h:mm:ss');
+
+            return (
+                <li className="notelistitem" key={note.id} onClick={noteItemClick}>
+                    <div className="title">{note.titleText}</div>
+                    <div className="updatedat">{formattedDate}</div>
+                </li>
+            );
         };
 
         return (
             <div className="notelist">
                 <div className="notelisttitle">Notes</div>
+                {this.props.notes.length > 0 ? (
+                    <div className="notelistheader">
+                        <span>Title</span>
+                        <span>Last updated</span>
+                    </div>
+                ) : ''}                
                 <ul>
                     {this.props.notes.map(createNoteListItem)}
                 </ul>

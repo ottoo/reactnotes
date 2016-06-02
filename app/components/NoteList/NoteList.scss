@@ -8,12 +8,33 @@
         border-bottom: 1px dashed #FF0000;
     }
 
+    .notelistheader {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
     .notelistitem {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 22px;
         letter-spacing: 1.5px;
         font-weight: 300px;
         cursor: pointer;
-        text-decoration: underline;
+
+        .title {
+            text-decoration: underline;
+        }
+
+        .updatedat {
+            font-size: 14px;
+        }
 
         &:hover {
             color: lighten(#000, 50%) !important;

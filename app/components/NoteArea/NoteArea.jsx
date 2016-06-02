@@ -19,6 +19,7 @@ class NoteArea extends React.Component {
             id: '',
             titleText: '',
             noteText: '',
+            updatedAt: '',
             disableSaveBtn: true
         };
     }
