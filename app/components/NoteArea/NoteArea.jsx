@@ -26,7 +26,7 @@ class NoteArea extends React.Component {
     componentDidMount() {
         const currentNote = this.props.currentNote;
 
-        if (currentNote) {
+        if (currentNote && !this.isPathForNewNote()) {
             this.setState({
                 id: currentNote.get('id'),
                 titleText: currentNote.get('titleText'),
@@ -51,7 +51,7 @@ class NoteArea extends React.Component {
     onSaveBtnClicked() {
         const pathname = this.props.location.pathname;
 
-        this.props.currentNote && pathname !== '/new'
+        this.props.currentNote && !this.isPathForNewNote()
             ? this.props.updateNote(this.state)
             : this.props.saveNote(this.state);
 
@@ -66,6 +66,10 @@ class NoteArea extends React.Component {
 
     handleTitleAreaChange(event) {
         this.setState({ titleText: event.target.value });
+    }
+
+    isPathForNewNote() {
+        return this.props.location.pathname === '/new';
     }
 
     handleTextAreaChange(event) {

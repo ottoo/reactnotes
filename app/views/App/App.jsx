@@ -28,9 +28,9 @@ class App extends React.Component {
             <nav className="nav">
               <ul>
                 <li><Link to="/">Home</Link></li>
-                {this.isUserLoggedIn() ? <li><Link to="/notes">Notes</Link></li> : null}
-                {this.isUserLoggedIn() ? <li><Link to="/new">Create note</Link></li> : null}
-                {!this.isUserLoggedIn() ? <li><Link to="/login">Login</Link></li> : null}
+                {this.isUserLoggedIn() ? <li><Link to="/notes">Notes</Link></li> : ''}
+                {this.isUserLoggedIn() ? <li><Link to="/new">Create note</Link></li> : ''}
+                {!this.isUserLoggedIn() ? <li><Link to="/login">Login</Link></li> : ''}
                 {this.isUserLoggedIn() ? <li><a href="" onClick={this.handleLogout}>Logout</a></li>
                 : null}
               </ul>
