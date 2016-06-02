@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { saveNote, updateNote } from './../actions/index.js';
 import NoteArea from './../components/NoteArea';
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
     const notes = state.noteReducer.get('notes');
     const currentNoteId = state.noteReducer.get('currentNoteId');
 
@@ -11,15 +11,13 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        saveNote: (note) => {
-            dispatch(saveNote(note));
-        },
-        updateNote: (note) => {
-            dispatch(updateNote(note));
-        }
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    saveNote: (note) => {
+        dispatch(saveNote(note));
+    },
+    updateNote: (note) => {
+        dispatch(updateNote(note));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteArea);

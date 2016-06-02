@@ -2,16 +2,14 @@ import { connect } from 'react-redux';
 import { setCurrentNoteId } from './../actions/index.js';
 import NoteList from './../components/NoteList';
 
-function mapStateToProps(state) {
-    return { notes: state.noteReducer.get('notes').toJS() };
-}
+const mapStateToProps = state => ({
+    notes: state.noteReducer.get('notes').toJS()
+});
 
-function mapDispatchToProps(dispatch) {
-    return {
-        setCurrentNoteId: (id) => {
-            dispatch(setCurrentNoteId(id));
-        }
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    setCurrentNoteId: (id) => {
+        dispatch(setCurrentNoteId(id));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteList);

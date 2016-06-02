@@ -8,9 +8,7 @@ import { browserHistory } from 'react-router';
  * @param  {Object} state
  * @return {Object}
  */
-function mapStateToProps(state) {
-    return state;
-}
+const mapStateToProps = state => state;
 
 /**
  * Maps the dispatched actions to component properties so that the dispatched
@@ -18,29 +16,27 @@ function mapStateToProps(state) {
  * @param  {Function}
  * @return {Object}
  */
-function mapDispatchToProps(dispatch) {
-    return {
-        // Validates the users token and throws the user to the login page if it
-        // is not found. Called also on browser refresh.
-        validateToken: () => {
-            const token = sessionStorage.getItem('jwtToken');
+const mapDispatchToProps = dispatch => ({
+    // Validates the users token and throws the user to the login page if it
+    // is not found. Called also on browser refresh.
+    validateToken: () => {
+        const token = sessionStorage.getItem('jwtToken');
 
-            if (!token) {
-                return false;
-            }
-
-            return dispatch(validateToken(token)).then(res => {
-                if (res && res.token) {
-                    sessionStorage.setItem('jwtToken', res.token);
-                    browserHistory.push('/notes');
-                } else {
-                    sessionStorage.removeItem('jwtToken');
-                    browserHistory.push('/');
-                }
-            });
+        if (!token) {
+            return false;
         }
-    };
-}
+
+        return dispatch(validateToken(token)).then(res => {
+            if (res && res.token) {
+                sessionStorage.setItem('jwtToken', res.token);
+                browserHistory.push('/notes');
+            } else {
+                sessionStorage.removeItem('jwtToken');
+                browserHistory.push('/');
+            }
+        });
+    }
+});
 
 /**
  * Finally connect the react component to the redux store.
