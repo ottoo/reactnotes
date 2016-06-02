@@ -23,6 +23,12 @@ class NoteArea extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname === '/new') {
+            this.resetState();
+        }
+    }
+
     componentDidMount() {
         const currentNote = this.props.currentNote;
 
