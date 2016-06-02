@@ -19,7 +19,7 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
     // Validates the users token and throws the user to the login page if it
     // is not found. Called also on browser refresh.
-    validateToken: () => {
+    validateToken() {
         const token = sessionStorage.getItem('jwtToken');
 
         if (!token) {

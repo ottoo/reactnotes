@@ -12,10 +12,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    saveNote: (note) => {
+    saveNote(note) {
         dispatch(saveNote(note));
     },
-    updateNote: (note) => {
+    updateNote(note) {
         dispatch(updateNote(note));
     }
 });

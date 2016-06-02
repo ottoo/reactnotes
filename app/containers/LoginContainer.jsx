@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-    login: (email, password) => {
+    login(email, password) {
         dispatch(login(email, password)).then((res) => {
             if (res && res.isValid) {
                 sessionStorage.setItem('jwtToken', res.token);

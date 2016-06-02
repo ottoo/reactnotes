@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentNoteId: (id) => {
+    setCurrentNoteId(id) {
         dispatch(setCurrentNoteId(id));
     }
 });
