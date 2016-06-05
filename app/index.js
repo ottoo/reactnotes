@@ -8,15 +8,11 @@ import LoginContainer from './containers/LoginContainer';
 import NoteAreaContainer from './containers/NoteAreaContainer';
 import NoteListContainer from './containers/NoteListContainer';
 
-import { store } from './stores/index.js';
+import configureStore from './stores/index.js';
 
 import './styles/main.scss';
 
-console.log('Initial state', store.getState());
-
-store.subscribe(() =>
-  console.log('State updated', store.getState())
-);
+const store = configureStore();
 
 function requireAuth(nextState, replace) {
     const token = sessionStorage.getItem('jwtToken');

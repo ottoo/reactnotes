@@ -6,15 +6,15 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './../reducers/index.js';
 
-// TODO: Can add preloaded state as the 2nd argument
-export const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
+const configureStore = () => {
+    // TODO: Can add preloaded state as the 2nd argument
+    const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
-export const getNotes = () => {
-    return store.getState().noteReducer.notes;
-}
+    store.subscribe(() =>
+      console.log('State updated', store.getState())
+    );
 
-export const findNote = id => {
-    return _.filter(getNotes(), (note) => {
-        return note.id === id;
-    });
-}
+    return store;
+};
+
+export default configureStore;
