@@ -34,7 +34,7 @@ class NoteList extends React.Component {
                         <span>Title</span>
                         <span>Last updated</span>
                     </div>
-                ) : ''}                
+                ) : ''}
                 <ul>
                     {this.props.notes.map(createNoteListItem)}
                 </ul>

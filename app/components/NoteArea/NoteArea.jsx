@@ -8,7 +8,6 @@ class NoteArea extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.handleTitleAreaChange = this.handleTitleAreaChange.bind(this);
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
         this.onSaveBtnClicked = this.onSaveBtnClicked.bind(this);
@@ -114,7 +113,8 @@ class NoteArea extends React.Component {
 
 NoteArea.contextTypes = {
     router: React.PropTypes.object.isRequired,
-    location: React.PropTypes.object
+    location: React.PropTypes.object,
+    noteId: React.PropTypes.string
 };
 
 NoteArea.propTypes = {

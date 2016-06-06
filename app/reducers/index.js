@@ -5,7 +5,7 @@ import { List, Map, fromJS } from 'immutable';
 
 const initialState = Map({
     notes: List(),
-    currentNoteId: null
+    // Additional data here..
 });
 
 function noteReducer(state = initialState, action) {
