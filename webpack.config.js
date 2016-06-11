@@ -15,7 +15,6 @@ const CommonChunksPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor'
 });
 
-
 module.exports = {
     devtool: 'eval-source-map',
     entry: {

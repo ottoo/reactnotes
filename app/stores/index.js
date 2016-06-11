@@ -7,12 +7,15 @@ import createLogger from 'redux-logger';
 import rootReducer from './../reducers/index.js';
 
 const configureStore = () => {
-    // TODO: Can add preloaded state as the 2nd argument
-    const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
+    let store = null;
 
-    store.subscribe(() =>
-      console.log('State updated', store.getState())
-    );
+    if (process.env.NODE_ENV === 'production') {
+        store = createStore(rootReducer, applyMiddleware(thunk));
+    } else {
+        store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
+    }
+
+    store.subscribe(() => {});
 
     return store;
 };
