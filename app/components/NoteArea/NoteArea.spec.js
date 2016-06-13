@@ -1,11 +1,8 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import expectJSX from 'expect-jsx';
+import { shallow, mount } from 'enzyme';
 
 import NoteArea from './NoteArea.jsx';
-
-expect.extend(expectJSX);
 
 let component = null;
 let renderer = null;
@@ -14,50 +11,47 @@ describe('NoteArea', () => {
 
     beforeEach(() => {
         NoteArea.contextTypes = {};
-        component = TestUtils.renderIntoDocument(<NoteArea />);
-        renderer = TestUtils.createRenderer();
-        renderer.render(<NoteArea />);
+    });
+
+    it('should have a textarea', () => {
+        expect(shallow(<NoteArea />).is('.notearea')).toBe(true);
     });
 
     it('should contain a textarea', () => {
-        const textArea = TestUtils.findRenderedDOMComponentWithTag(component, 'textarea');
-        expect(textArea).toExist();
-    });
-
-    it('should render a div with a css class', () => {
-        const result = renderer.getRenderOutput();
-        expect(result.type).toEqual('div');
-        expect(result.props.className).toEqual('notearea');
+        expect(mount(<NoteArea />).find('textarea').length).toEqual(1);
     });
 
     it('should have a state', () => {
-        const state = component.state;
-        expect(state.id).toEqual('');
-        expect(state.titleText).toEqual('');
-        expect(state.noteText).toEqual('');
-        expect(state.disableSaveBtn).toEqual(true);
+        const component = shallow(<NoteArea />);
+        expect(component.state().id).toEqual('');
+        expect(component.state().titleText).toEqual('');
+        expect(component.state().noteText).toEqual('');
+        expect(component.state().disableSaveBtn).toEqual(true);
     });
 
     it('should have a save button with text "Save"', () => {
-        const saveButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
-        expect(saveButton.textContent).toEqual('Save');
+        const component = mount(<NoteArea />);
+        const saveButtonText = component.find('.noteactionbtn').first().text();
+        expect(saveButtonText).toEqual('Save');
     });
 
     it('should have a reset button with text "Reset"', () => {
-        const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
-        expect(resetButton.textContent).toEqual('Reset');
+        const component = mount(<NoteArea />);
+        const resetButtonText = component.find('.noteactionbtn').at(1).text();
+        expect(resetButtonText).toEqual('Reset');
     });
 
     it('should reset state when clicking reset button', () => {
-        component.state = {
+        const component = mount(<NoteArea />);
+
+        component.setState({
             titleText: 'title',
             noteText: 'note'
-        };
+        });
 
-        const resetButton = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
-        TestUtils.Simulate.click(resetButton);
+        component.find('.noteactionbtn').at(1).simulate('click');
 
-        expect(component.state.titleText).toEqual('');
-        expect(component.state.noteText).toEqual('');
+        expect(component.state().titleText).toEqual('');
+        expect(component.state().noteText).toEqual('');
     });
 });

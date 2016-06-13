@@ -59,14 +59,14 @@ module.exports = function(config) {
 
 
     phantomjsLauncher: {
-      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom) 
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
       exitOnResourceError: true
     },
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
@@ -74,16 +74,23 @@ module.exports = function(config) {
 
 
     webpack: { // a copy of your webpack config
+      devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.jsx?$/, loader: 'babel-loader' },
+          { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
           { test: /\.scss$/, loaders: ["style", "css", "sass"]
             }
         ]
       },
-        plugins: [new webpack.ProvidePlugin({
-            '_': 'lodash'
-        })],
+      externals: {
+        'cheerio': 'window',
+        'react/addons': true,
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true
+      },
+      plugins: [new webpack.ProvidePlugin({
+        '_': 'lodash'
+      })],
     },
 
 
