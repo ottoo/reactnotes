@@ -11,15 +11,11 @@ const ProvidePlugin = new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery'
 });
-const CommonChunksPlugin = new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor'
-});
 
 module.exports = {
     devtool: 'eval-source-map',
     entry: {
-        app: './app/index.js',
-        vendor: './app/vendor.js'
+        app: './app/index.js'
     },
     module: {
         loaders: [{

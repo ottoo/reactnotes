@@ -5,6 +5,8 @@ import configureStore from './stores/index.js';
 import Root from './components/Root/index.js';
 import './styles/main.scss';
 
+require.context('./res', false, /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/);
+
 const store = configureStore();
 
 ReactDOM.render((

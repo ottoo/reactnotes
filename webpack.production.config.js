@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     template: __dirname + '/app/index.html',
@@ -20,12 +21,14 @@ const DedupePlugin = new webpack.optimize.DedupePlugin();
 const DefinePlugin = new webpack.DefinePlugin({
     'process.env.NODE_ENV': '"production"'
 });
+const ExtractText = new ExtractTextPlugin('styles.css');
 
 module.exports = {
     devtool: 'source-map',
-    entry: [
-        './app/index.js'
-    ],
+    entry: {
+        app: './app/index.js',
+        vendor: ['jquery', 'lodash']
+    },
     module: {
         loaders: [{
             test: /\.jsx?$/,
@@ -33,18 +36,18 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            loaders: ['style', 'css', 'sass']
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
         }, {
             test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
             loader: 'file?name=res/[name].[ext]'
         }]
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: __dirname + '/dist',
         hash: true
     },
-    plugins: [HTMLWebpackPluginConfig, UglifyJSPluginConfig, DedupePlugin,
+    plugins: [ExtractText, HTMLWebpackPluginConfig, UglifyJSPluginConfig, DedupePlugin,
         DefinePlugin, ProvidePlugin],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx']
