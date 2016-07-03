@@ -1,12 +1,10 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import expectJSX from 'expect-jsx';
+import { shallow, mount, render } from 'enzyme';
 
 import NoteList from './NoteList.jsx';
 import ContextWrapper from './../../test/ContextWrapper.js';
-
-expect.extend(expectJSX);
 
 let component = null;
 let renderer = null;
@@ -31,21 +29,21 @@ const mockNotes = [
 ];
 
 describe('NoteList', () => {
-
-    beforeEach(() => {
-        component = TestUtils.renderIntoDocument(<ContextWrapper><NoteList notes={mockNotes} setCurrentNoteId={setCurrentNoteIdMock} /></ContextWrapper>);
-        renderer = TestUtils.createRenderer();
-        renderer.render(<NoteList notes={mockNotes} />);
-    });
-
     it('should contain 3 notes', () => {
-        const notes = TestUtils.scryRenderedDOMComponentsWithClass(component, 'notelistitem');
+        const component = shallow(<NoteList notes={mockNotes} login={{email: ''}}/>);
+        const notes = component.find('.notelistitem');
         expect(notes.length).toEqual(3);
     });
 
     it('should redirect to note page', () => {
-        const note = TestUtils.scryRenderedDOMComponentsWithClass(component, 'notelistitem')[0];
-        TestUtils.Simulate.click(note);
-        expect(currentNoteIdMock).toEqual(1);
+        const component = mount(<ContextWrapper>
+            <NoteList
+                notes={mockNotes}
+                login={{email: ''}}
+                setCurrentNoteId={setCurrentNoteIdMock}
+            />
+        </ContextWrapper>);
+        const note = component.find('.notelistitem').at(1).simulate('click');
+        expect(currentNoteIdMock).toEqual(2);
     });
 });

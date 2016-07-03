@@ -27,9 +27,9 @@ class NoteList extends React.Component {
         };
 
         let welcomeText = null;
-        if (this.props.login.email) {
-            welcomeText = <div className="welcometext">Welcome, {this.props.login.email}</div>;
-        }
+        // if (this.props.login.email) {
+        //     welcomeText = <div className="welcometext">Welcome, {this.props.login.email}</div>;
+        // }
 
         return (
             <div className="notelist">
