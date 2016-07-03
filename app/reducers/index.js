@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { modelReducer, formReducer } from 'react-redux-form';
 import { SAVE_NOTE, UPDATE_NOTE, SET_CURRENT_NOTE_ID } from './../actions/index.js';
 import shortid from 'shortid';
 import { List, Map, fromJS } from 'immutable';
@@ -40,8 +41,20 @@ function noteReducer(state = initialState, action) {
     }
 }
 
+const loginModelReducer = modelReducer('login', {
+    email: '',
+    password: ''
+});
+
+const loginFormReducer = formReducer('login', {
+    email: '',
+    password: ''
+})
+
 const rootReducer = combineReducers({
-    noteReducer
+    noteReducer,
+    login: loginModelReducer,
+    loginForm: loginFormReducer
 });
 
 export default rootReducer;

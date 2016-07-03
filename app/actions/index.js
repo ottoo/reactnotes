@@ -44,18 +44,15 @@ export const validateToken = (token) => {
     };
 }
 
-export const login = (email, password) => {
-    return dispatch => {
+export const login = (user) => {
+    // return dispatch => {
         return fetch(`${CONFIG.BACKEND_URL}/user/login`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    email,
-                    password,
-                })
+                body: JSON.stringify(user)
             })
             .then(checkStatus)
             .then(response => response.json())
@@ -66,5 +63,5 @@ export const login = (email, password) => {
             .catch(error => {
                 console.error('request failed', error.response.statusText);
             });
-    };
+    // };
 }

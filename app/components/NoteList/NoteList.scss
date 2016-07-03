@@ -1,9 +1,14 @@
 .notelist {
 
-    .notelisttitle {
-        font-size: 32px;
-        letter-spacing: 1.5px;
+    .welcometext {
+        font-size: 30px;
         font-weight: 300;
+    }
+
+    .notelisttitle {
+        font-size: 24px;
+        font-weight: 300;
+        margin-top: 50px;
         margin-bottom: 25px;
         border-bottom: 1px dashed #FF0000;
     }

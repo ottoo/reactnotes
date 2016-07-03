@@ -3,7 +3,8 @@ import { setCurrentNoteId } from './../actions/index.js';
 import NoteList from './../components/NoteList';
 
 const mapStateToProps = state => ({
-    notes: state.noteReducer.get('notes').toJS()
+    notes: state.noteReducer.get('notes').toJS(),
+    login: state.login
 });
 
 const mapDispatchToProps = dispatch => ({
