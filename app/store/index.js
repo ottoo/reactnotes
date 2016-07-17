@@ -8,13 +8,13 @@ import rootReducer from './../reducers/index.js';
 
 const configureStore = () => {
     let store = null;
+    let middlewares = [thunk];
 
-    if (process.env.NODE_ENV === 'production') {
-        store = createStore(rootReducer, applyMiddleware(thunk));
-    } else {
-        store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
+    if (process.env.NODE_ENV === 'development') {
+        middlewares.push(createLogger());
     }
 
+    store = createStore(rootReducer, applyMiddleware(...middlewares));
     store.subscribe(() => {});
 
     return store;

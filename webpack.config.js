@@ -5,7 +5,9 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     filename: 'index.html',
     inject: 'body'
 });
-const HotModuleReplaceMentPlugin = new webpack.HotModuleReplacementPlugin();
+const DefinePlugin = new webpack.DefinePlugin({
+    'process.env.NODE_ENV': '"development"'
+});
 const ProvidePlugin = new webpack.ProvidePlugin({
     '_': 'lodash',
     $: 'jquery',
@@ -36,15 +38,13 @@ module.exports = {
         path: __dirname + '/app',
         publicPath: '/'
     },
-    plugins: [HTMLWebpackPluginConfig, HotModuleReplaceMentPlugin, ProvidePlugin],
+    plugins: [DefinePlugin,
+        HTMLWebpackPluginConfig, ProvidePlugin],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx']
     },
     devServer: {
         contentBase: __dirname + '/app',
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true
+        historyApiFallback: true
     }
 };
