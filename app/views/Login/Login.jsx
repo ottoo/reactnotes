@@ -9,7 +9,6 @@ class Login extends React.Component {
     }
 
     handleSubmit(user) {
-        console.log(user)
         this.props.doLogin(user);
     }
 

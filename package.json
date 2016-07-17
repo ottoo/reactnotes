@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean&&webpack --config webpack.production.config.js",
     "clean": "rimraf dist",
-    "start": "webpack-dev-server --progress --inline --hot",
+    "start": "node webpack.dev.server.js",
     "test": "NODE_ENV=test karma start"
   },
   "keywords": [
@@ -67,6 +67,7 @@
     "node-sass": "^3.8.0",
     "phantomjs2": "^2.2.0",
     "react-addons-test-utils": "^15.2.0",
+    "react-hot-loader": "^3.0.0-beta.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.13.1",

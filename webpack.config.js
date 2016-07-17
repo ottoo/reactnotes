@@ -5,6 +5,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     filename: 'index.html',
     inject: 'body'
 });
+const HotReloadPlugin = new webpack.HotModuleReplacementPlugin()
 const DefinePlugin = new webpack.DefinePlugin({
     'process.env.NODE_ENV': '"development"'
 });
@@ -16,13 +17,16 @@ const ProvidePlugin = new webpack.ProvidePlugin({
 
 module.exports = {
     devtool: 'eval-source-map',
-    entry: {
-        app: './app/index.js'
-    },
+    entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        'react-hot-loader/patch',
+        './app/index.js'
+    ],
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loader: 'babel-loader',
+            loader: 'babel',
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
@@ -38,13 +42,9 @@ module.exports = {
         path: __dirname + '/app',
         publicPath: '/'
     },
-    plugins: [DefinePlugin,
+    plugins: [DefinePlugin, HotReloadPlugin,
         HTMLWebpackPluginConfig, ProvidePlugin],
     resolve: {
         extensions: ['', '.js', '.json', '.jsx']
-    },
-    devServer: {
-        contentBase: __dirname + '/app',
-        historyApiFallback: true
     }
 };
